@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color PickUp</title>
+  <link type="text/css" rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <!-- Main Header Control Grid -->
+  <header class="controlHeader">
+    <div class="controlLeft">
+      <button class="controlButton" id="clearHistory" title="Clear History">
+        <svg>
+          <use href="#iconClear"></use>
+        </svg>
+      </button>
+      <button class="controlButton" id="colorPicker" title="Color Picker">
+        <svg>
+          <use href="#iconColorPicker"></use>
+        </svg>
+      </button>
+      <button class="controlButton" id="eyeDropper" title="Eye Dropper">
+        <svg>
+          <use href="#iconEyeDropper"></use>
+        </svg>
+      </button>
+      <div class="controlButton" id="tileSize" title="Tile Size (px)">
+        <input id="sizeInput" type="number" value="28" min="8" max="128" step="1">
+      </div>
+    </div>
+
+    <div class="controlRight">
+      <button class="toolButton" id="reloadUi" title="Reload UI">
+        <svg>
+          <use href="#iconReload"></use>
+        </svg>
+      </button>
+      <button class="toolButton" id="themeToggle" title="Dark | Light Mode">
+        <svg>
+          <use href="#iconTheme"></use>
+        </svg>
+      </button>
+      <button class="toolButton" id="supportLink" title="Support Page">
+        <svg>
+          <use href="#iconSupport"></use>
+        </svg>
+      </button>
+      <button class="toolButton" id="donationLink" title="Make a Donation">
+        <svg>
+          <use href="#iconDonation"></use>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Active Workspace -->
+  <main class="pickerWorkspace">
+    <div class="colorDisplaySection">
+      <div class="colorPreviewContainer">
+        <input id="pickerNative" type="color">
+      </div>
+      <div class="colorDetailsContainer" id="colorDetails">
+        <input type="text" value="Loading..." readonly class="colorCodeInput">
+        <input type="text" value="Loading..." readonly class="colorCodeInput">
+        <input type="text" value="Loading..." readonly class="colorCodeInput">
+        <input type="text" value="Loading..." readonly class="colorCodeInput">
+        <input type="text" value="Loading..." readonly class="colorCodeInput">
+        <input type="text" value="Loading..." readonly class="colorCodeInput">
+      </div>
+    </div>
+  </main>
+
+  <!-- Palette Collapsible Lists -->
+  <section class="paletteSection">
+    <details class="paletteAccordion" index="0">
+      <summary class="paletteSummary">User defined</summary>
+      <div class="paletteTiles userTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="1">
+      <summary class="paletteSummary">Artistic colors</summary>
+      <div class="paletteTiles artisticTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="2">
+      <summary class="paletteSummary">Bluish colors</summary>
+      <div class="paletteTiles bluishTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="3">
+      <summary class="paletteSummary">Favorite colors</summary>
+      <div class="paletteTiles favoriteTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="4">
+      <summary class="paletteSummary">UI design colors</summary>
+      <div class="paletteTiles uiDesignTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="5">
+      <summary class="paletteSummary">Popular colors</summary>
+      <div class="paletteTiles popularTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="6">
+      <summary class="paletteSummary">Drawing colors</summary>
+      <div class="paletteTiles drawingTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="7">
+      <summary class="paletteSummary">Game colors</summary>
+      <div class="paletteTiles gameTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="8">
+      <summary class="paletteSummary">CSS3 colors</summary>
+      <div class="paletteTiles css3Tiles"></div>
+    </details>
+    <details class="paletteAccordion" index="9">
+      <summary class="paletteSummary">Material colors</summary>
+      <div class="paletteTiles materialTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="10">
+      <summary class="paletteSummary">Rainbow colors</summary>
+      <div class="paletteTiles rainbowTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="11">
+      <summary class="paletteSummary">Spectrum colors</summary>
+      <div class="paletteTiles spectrumTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="12">
+      <summary class="paletteSummary">Safe set of colors</summary>
+      <div class="paletteTiles safeTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="13">
+      <summary class="paletteSummary">Nice Random colors</summary>
+      <div class="paletteTiles randomTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="14">
+      <summary class="paletteSummary">Monitor colors</summary>
+      <div class="paletteTiles monitorTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="15">
+      <summary class="paletteSummary">Comic colors</summary>
+      <div class="paletteTiles comicTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="16">
+      <summary class="paletteSummary">Large set of colors</summary>
+      <div class="paletteTiles largeTiles"></div>
+    </details>
+    <details class="paletteAccordion" index="17">
+      <summary class="paletteSummary">Hues colors</summary>
+      <div class="paletteTiles huesTiles"></div>
+    </details>
+  </section>
+
+  <!-- Embedded Sprite Sheet (Ensures reliable local references across Extension popups and standard Web contexts) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="iconClear" viewBox="0 0 48 48">
+      <path
+        d="M 9.8212753,13.365952 H 34.12766 V 20.455317 L 44.25532,10.327657 34.12766,0.199997 V 7.2893585 H 3.744681 V 22.987232 H 9.8212753 Z" />
+      <path
+        d="M 38.178723,34.634044 13.872338,34.634037 13.872339,27.544678 3.744681,37.672337 13.872339,47.8 13.87234,40.710639 44.255317,40.710637 44.255318,25.012763 38.178724,25.012764 Z" />
+    </symbol>
+    <symbol id="iconColorPicker" viewBox="0 0 48 48">
+      <path
+        d="M 35.906476,25.148906 12.562765,1.8051949 8.8679796,5.4999776 15.08253,11.714523 1.6481437,25.148906 C 0.12061846,26.676428 0.12061846,29.15703 1.6481437,30.684552 L 16.009483,45.045899 C 16.766726,45.816189 17.772016,46.194805 18.777306,46.194805 19.782607,46.194805 20.787897,45.816189 21.545129,45.045899 L 35.906476,30.684552 C 37.433998,29.15703 37.433998,26.676428 35.906476,25.148906 Z M 6.25683,27.916729 18.777306,15.40931 31.297794,27.916729 Z M 42.277691,31.833458 C 42.277691,31.833458 37.055382,37.486604 37.055382,40.972496 37.055382,43.857819 39.392368,46.194805 42.277691,46.194805 45.163014,46.194805 47.5,43.857819 47.5,40.972496 47.5,37.486604 42.277691,31.833458 42.277691,31.833458 Z" />
+    </symbol>
+    <symbol id="iconEyeDropper" viewBox="0 0 96 96">
+      <path
+        d="M90,24.0217a17.9806,17.9806,0,0,0-5.2969-12.7968,18.5331,18.5331,0,0,0-25.6054,0L46.23,24.0972,41.9121,19.78a5.9994,5.9994,0,1,0-8.4844,8.4844l4.3184,4.3184L7.7578,62.5647A5.9956,5.9956,0,0,0,6,66.8069V83.9221a5.9966,5.9966,0,0,0,6,6H29.1152a5.9956,5.9956,0,0,0,4.2422-1.7578L63.34,58.176l4.3184,4.3184A5.9994,5.9994,0,0,0,76.1426,54.01L71.825,49.6924,84.6973,36.8245A17.9861,17.9861,0,0,0,90,24.0217Zm-63.3691,53.9H18V69.2913L46.2305,41.0667l8.625,8.625Z" />
+    </symbol>
+    <symbol id="iconReload" viewBox="0 0 512 512">
+      <path
+        d="M281.525,228.102l104.758-78.042 c12.082-12.085,12.082-24.259,0-36.342L281.525,35.674c-3.274-2.359-7.359-3.725-11.723-3.725c-10.992,0-19.803,8.536-19.803,19.083  v35.429C144.611,86.737,59.205,172.046,59.205,277.258c0,105.396,85.672,190.793,191.248,190.793 c98.03,0,178.809-73.498,189.977-168.169c0.092-0.275,0.367-3.187,0.367-4.455c0-9.992-8.181-18.169-18.261-18.169h-45.793 c-14.993,0-26.349,10.355-27.893,18.986c-8.811,46.156-49.519,80.954-98.397,80.954c-55.329,0-100.127-44.701-100.127-99.94 c0-55.064,44.523-99.667,99.674-99.941v35.437c0,10.541,8.811,19.076,19.803,19.076C274.166,231.83,278.251,230.471,281.525,228.102 z" />
+    </symbol>
+    <symbol id="iconTheme" viewBox="0 0 122.8799 122.8799">
+      <path
+        d="M 63.550085,1.4875858 A 60.101027,60.101027 0 0 0 3.45,61.587666 60.101027,60.101027 0 0 0 63.550085,121.6899 60.101027,60.101027 0 0 0 119.56373,83.196612 50.463617,50.463617 0 0 1 102.0998,86.352622 50.463617,50.463617 0 0 1 51.637166,35.887862 50.463617,50.463617 0 0 1 65.189815,1.5691534 60.101027,60.101027 0 0 0 63.550085,1.4875858 Z" />
+    </symbol>
+    <symbol id="iconSupport" viewBox="0 0 1792 1792">
+      <path
+        d="M1088 1256v240q0 16-12 28t-28 12h-240q-16 0-28-12t-12-28v-240q0-16 12-28t28-12h240q16 0 28 12t12 28zm316-600q0 54-15.5 101t-35 76.5-55 59.5-57.5 43.5-61 35.5q-41 23-68.5 65t-27.5 67q0 17-12 32.5t-28 15.5h-240q-15 0-25.5-18.5t-10.5-37.5v-45q0-83 65-156.5t143-108.5q59-27 84-56t25-76q0-42-46.5-74t-107.5-32q-65 0-108 29-35 25-107 115-13 16-31 16-12 0-25-8l-164-125q-13-10-15.5-25t5.5-28q160-266 464-266 80 0 161 31t146 83 106 127.5 41 158.5z" />
+    </symbol>
+    <symbol id="iconDonation" viewBox="-0.709 -11.555 141.732 141.732">
+      <path
+        d="M140.314,37.654C140.314,16.858,123.402,0,102.537,0c-13.744,0-25.77,7.317-32.379,18.255C63.549,7.317,51.521,0,37.777,0 C16.912,0,0,16.858,0,37.654c0,10.821,4.588,20.57,11.922,27.438h-0.01l54.084,51.584c0.992,1.188,2.48,1.945,4.148,1.945 c1.545,0,2.936-0.653,3.92-1.696l54.346-51.833h-0.016C135.729,58.225,140.314,48.476,140.314,37.654" />
+    </symbol>
+  </svg>
+
+  <!-- External Palette Data Sources (Order maintained relative to /page/) -->
+  <script type="text/javascript" src="pallets/artistic.js"></script>
+  <script type="text/javascript" src="pallets/bluish.js"></script>
+  <script type="text/javascript" src="pallets/comic.js"></script>
+  <script type="text/javascript" src="pallets/css3.js"></script>
+  <script type="text/javascript" src="pallets/drawing.js"></script>
+  <script type="text/javascript" src="pallets/favorite.js"></script>
+  <script type="text/javascript" src="pallets/game.js"></script>
+  <script type="text/javascript" src="pallets/hues.js"></script>
+  <script type="text/javascript" src="pallets/large.js"></script>
+  <script type="text/javascript" src="pallets/material.js"></script>
+  <script type="text/javascript" src="pallets/monitor.js"></script>
+  <script type="text/javascript" src="pallets/popular.js"></script>
+  <script type="text/javascript" src="pallets/rainbow.js"></script>
+  <script type="text/javascript" src="pallets/random.js"></script>
+  <script type="text/javascript" src="pallets/safe.js"></script>
+  <script type="text/javascript" src="pallets/spectrum.js"></script>
+  <script type="text/javascript" src="pallets/ui.js"></script>
+
+  <script type="text/javascript" src="pallets/notify.js"></script>
+  <!-- Main Script -->
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>

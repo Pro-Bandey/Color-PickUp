@@ -1,0 +1,338 @@
+:root {
+  /* Dynamic Tile Dimensions (Modified by JS) */
+  --tileWidth: 28px;
+  --tileHeight: 28px;
+
+  /* Light Theme Color Tokens */
+  --bgColor: #ffffff;
+  --surfaceColor: #f9fafb;
+  --surfaceColorSecondary: #f3f4f6;
+  --surfaceColorHover: #e5e7eb;
+  --textColor: #111827;
+  --textColorMuted: #4b5563;
+  --borderColor: #e5e7eb;
+  --accentColor: #3b82f6;
+  --shadowSubtle: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadowMedium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --fontSans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fontMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Dark Theme Color Tokens */
+html[theme="dark"] {
+  --bgColor: #121212;
+  --surfaceColor: #1e1e1e;
+  --surfaceColorSecondary: #272727;
+  --surfaceColorHover: #333333;
+  --textColor: #f9fafb;
+  --textColorMuted: #9ca3af;
+  --borderColor: #2d2d2d;
+  --shadowSubtle: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadowMedium: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Base Document Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fontSans);
+  color: var(--textColor);
+  background-color: var(--bgColor);
+  width: 100%;
+  min-width: 440px;
+  max-width: 770px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 500px;
+  padding: 12px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 1. Header & Control Bar styling */
+.controlHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--borderColor);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.controlLeft,
+.controlRight {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Unified Control Buttons */
+.controlButton,
+.toolButton {
+  background: var(--surfaceColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-in-out;
+  color: var(--textColor);
+}
+
+.controlButton:hover,
+.toolButton:hover {
+  background-color: var(--surfaceColorHover);
+  box-shadow: var(--shadowSubtle);
+  transform: translateY(-1px);
+}
+
+.controlButton svg,
+.toolButton svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--textColorMuted);
+  pointer-events: none;
+  transition: fill 0.15s ease;
+}
+
+.controlButton:hover svg,
+.toolButton:hover svg {
+  fill: var(--textColor);
+}
+
+/* Tile Size Control Specifics */
+#tileSize {
+  width: auto;
+  padding: 0 6px;
+}
+
+#sizeInput {
+  background: transparent;
+  border: none;
+  color: var(--textColor);
+  font-family: var(--fontMono);
+  font-weight: 600;
+  font-size: 13px;
+  width: 48px;
+  text-align: center;
+  outline: none;
+}
+
+#sizeInput::-webkit-inner-spin-button,
+#sizeInput::-webkit-outer-spin-button {
+  appearance: none;
+  display: none;
+  opacity: 1;
+}
+
+/* Hide Web specific controls inside extension popup contexts */
+html[context="webapp"] #reloadUi,
+html[context="webapp"] #supportLink,
+html[context="webapp"] #donationLink {
+  display: none;
+}
+
+/* 2. Workspace & Color Details Area */
+.pickerWorkspace {
+  margin-bottom: 16px;
+}
+
+.colorDisplaySection {
+  display: flex;
+  background-color: var(--surfaceColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  padding: 8px;
+  gap: 12px;
+  box-shadow: var(--shadowSubtle);
+}
+
+/* Color Picker Container styling */
+.colorPreviewContainer {
+  flex: 1;
+  min-width: 130px;
+  height: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--borderColor);
+  cursor: pointer;
+  position: relative;
+  background-size: 16px 16px;
+  background-image:
+    linear-gradient(45deg, var(--borderColor) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--borderColor) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--borderColor) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--borderColor) 75%);
+  transition: transform 0.2s ease;
+}
+
+.colorPreviewContainer:hover {
+  transform: scale(1.01);
+}
+
+#pickerNative {
+  width: 100%;
+  min-height: 100px;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Numeric Code Inputs Column */
+.colorDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  flex: 1.5;
+}
+
+.colorCodeInput {
+  background: var(--surfaceColorSecondary);
+  color: var(--textColor);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  height: 26px;
+  font-family: var(--fontMono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 0 10px;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.colorCodeInput:hover {
+  background-color: var(--surfaceColorHover);
+  border-color: var(--borderColor);
+  box-shadow: var(--shadowSubtle);
+}
+
+/* 3. Palette Expansion Accoridons */
+.paletteSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.paletteAccordion {
+  background-color: var(--surfaceColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.paletteAccordion[open] {
+  box-shadow: var(--shadowSubtle);
+}
+
+.paletteSummary {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+  color: var(--textColorMuted);
+  outline: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.paletteSummary:hover {
+  background-color: var(--surfaceColorHover);
+  color: var(--textColor);
+}
+
+/* Palette Tile Grids */
+.paletteTiles {
+  padding: 10px;
+  border-top: 1px solid var(--borderColor);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--tileWidth), 1fr));
+  gap: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.paletteTiles input {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  width: var(--tileWidth) !important;
+  height: var(--tileHeight) !important;
+  min-width: var(--tileWidth);
+  max-width: var(--tileWidth);
+  min-height: var(--tileHeight);
+  max-height: var(--tileHeight);
+  outline: none;
+  text-align: center;
+  color: transparent;
+  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.1s ease;
+}
+
+html[theme="dark"] .paletteTiles input {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.paletteTiles input:hover {
+  transform: scale(1.25);
+  box-shadow: var(--shadowMedium);
+  z-index: 5;
+}
+
+/* Style for selected state checkmark within tile inputs */
+.paletteTiles input[value="✓"] {
+  color: rgb(189, 187, 187) !important;
+  font-size: 11px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* 4. Responsive Adaptations */
+@media (max-width: 480px) {
+  body {
+    min-width: 360px;
+    padding: 8px;
+  }
+
+  .colorDisplaySection {
+    flex-direction: column;
+  }
+
+  .colorPreviewContainer {
+    width: 100%;
+    height: 120px;
+  }
+}
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block:5px;}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accentColor);
+    border-radius:20px;
+    cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--surfaceColorHover);
+    cursor: grabbing;
+}
