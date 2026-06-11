@@ -198,7 +198,7 @@ const config = {
       const currentActiveColor = config.storage.readValue("colorPickerCurrent");
 
       if (pickerNative) {
-        pickerNative.parentNode.style.background = "url('../icons/192.png') no-repeat center";
+        pickerNative.parentNode.style.background = "url('./src/192.png') no-repeat center";
         pickerNative.parentNode.style.backgroundSize = "contain";
       }
 
