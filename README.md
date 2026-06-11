@@ -2,7 +2,7 @@
 
 **Color PickUp** is a minimalist color picker extension and web tool designed to help you inspect, convert, and organize color palettes from a clean, responsive popup.
 
-The interface is divided into three key functional areas:
+> The interface is divided into three key functional areas:
 
 ### 1. The Top Control Bar
 
@@ -30,7 +30,7 @@ Located at the bottom of the interface, this area features collapsible, grid-bas
 **Note on the Eye Dropper Feature:**  
 The Eye Dropper allows you to inspect and capture colors from anywhere on your desktop screen, including areas outside of your browser window. This utilizes the modern browser `EyeDropper` API; on unsupported environments or mobile devices, the extension will gracefully notify you and prompt you to use the standard color picker block.
 
-You can install this application as a Progressive Web App (PWA) on your mobile device, run it as a standalone web application, or deploy it as a browser extension on Google Chrome, Mozilla Firefox, and other Chromium-based browsers.
+You can [install](https://Pro-Bandey.github.io/Color-PickUp) this application as a Progressive Web App (PWA) on your mobile device, run it as a standalone web application, or deploy it as a browser extension on Google Chrome, Mozilla Firefox, and other Chromium-based browsers.
 
 ---
 
