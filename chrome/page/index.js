@@ -30,7 +30,6 @@ const config = {
           await navigator.clipboard.writeText(config.clipboard);
         }
       } catch (err) {
-        // Fallback for environments with strict permission security models
         document.execCommand("copy");
       }
     }
@@ -60,9 +59,12 @@ const config = {
       config.storage.writeValue("colorPickerCurrent", color);
 
       const pickerNative = document.getElementById("pickerNative");
+      const titleHeaderHeading = document.getElementById("titleHeaderHeading");
       if (pickerNative) {
         pickerNative.value = color;
         pickerNative.parentNode.style.backgroundColor = color;
+        titleHeaderHeading.style.color = color;
+        document.documentElement.style.setProperty('--accentColor', `${color}`);
       }
 
       const detailsElement = document.getElementById("colorDetails");
@@ -89,7 +91,6 @@ const config = {
           callback();
         });
       } else {
-        // Web PWA Fallback
         config.storage.localCache = {};
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
@@ -247,7 +248,7 @@ const config = {
       if (currentActiveColor) {
         config.updateColorInfo(currentActiveColor);
       } else {
-        const defaultInput = document.querySelector("input[color='#b48ead']");
+        const defaultInput = document.querySelector("input[color='#3b82f6']");
         if (defaultInput) {
           defaultInput.click();
         } else {
@@ -456,8 +457,6 @@ const config = {
     const clearHistory = document.getElementById("clearHistory");
     const reloadUi = document.getElementById("reloadUi");
     const pickerNative = document.getElementById("pickerNative");
-    const supportLink = document.getElementById("supportLink");
-    const donationLink = document.getElementById("donationLink");
     const eyeDropper = document.getElementById("eyeDropper");
     const colorPicker = document.getElementById("colorPicker");
 
@@ -466,28 +465,6 @@ const config = {
         const action = window.confirm("Do you really want to clear all the user colors from storage?");
         if (action === true) {
           config.color.storePickedColor("user", null);
-        }
-      }, false);
-    }
-
-    if (supportLink) {
-      supportLink.addEventListener("click", function () {
-        const url = config.addon.getHomepageUrl();
-        if (typeof chrome !== "undefined" && chrome.tabs) {
-          chrome.tabs.create({ url: url, active: true });
-        } else {
-          window.open(url, "_blank");
-        }
-      }, false);
-    }
-
-    if (donationLink) {
-      donationLink.addEventListener("click", function () {
-        const url = `${config.addon.getHomepageUrl()}?reason=support`;
-        if (typeof chrome !== "undefined" && chrome.tabs) {
-          chrome.tabs.create({ url: url, active: true });
-        } else {
-          window.open(url, "_blank");
         }
       }, false);
     }

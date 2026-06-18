@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Color PickUp",
-  "version": "2.5",
+  "version": "3.0",
   "description": "An elegant color picker and palette explorer for developers and designers.",
   "homepage_url": "https://Pro-Bandey.github.io/Projects/?Pro=Color-PickUp",
 
@@ -29,6 +29,7 @@
   "background": {
     "scripts": ["background.js"]
   },
+
   "browser_specific_settings": {
     "gecko": {
       "id": "color-pickup@pro-bandey.com",

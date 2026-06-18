@@ -1,9 +1,6 @@
 :root {
-  /* Dynamic Tile Dimensions (Modified by JS) */
   --tileWidth: 28px;
   --tileHeight: 28px;
-
-  /* Light Theme Color Tokens */
   --bgColor: #ffffff;
   --surfaceColor: #f9fafb;
   --surfaceColorSecondary: #f3f4f6;
@@ -18,7 +15,6 @@
   --fontMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Dark Theme Color Tokens */
 html[theme="dark"] {
   --bgColor: #121212;
   --surfaceColor: #1e1e1e;
@@ -31,7 +27,6 @@ html[theme="dark"] {
   --shadowMedium: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Base Document Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -45,15 +40,28 @@ body {
   width: 100%;
   min-width: 440px;
   max-width: 770px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   height: auto;
   min-height: 500px;
   padding: 12px;
+  margin: auto;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* 1. Header & Control Bar styling */
+.titleHeader {
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.5rem auto;
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.titleHeaderHeading {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
 .controlHeader {
   display: flex;
   justify-content: space-between;
@@ -70,7 +78,6 @@ body {
   align-items: center;
 }
 
-/* Unified Control Buttons */
 .controlButton,
 .toolButton {
   background: var(--surfaceColor);
@@ -107,7 +114,6 @@ body {
   fill: var(--textColor);
 }
 
-/* Tile Size Control Specifics */
 #tileSize {
   width: auto;
   padding: 0 6px;
@@ -132,14 +138,6 @@ body {
   opacity: 1;
 }
 
-/* Hide Web specific controls inside extension popup contexts */
-html[context="webapp"] #reloadUi,
-html[context="webapp"] #supportLink,
-html[context="webapp"] #donationLink {
-  display: none;
-}
-
-/* 2. Workspace & Color Details Area */
 .pickerWorkspace {
   margin-bottom: 16px;
 }
@@ -154,7 +152,6 @@ html[context="webapp"] #donationLink {
   box-shadow: var(--shadowSubtle);
 }
 
-/* Color Picker Container styling */
 .colorPreviewContainer {
   flex: 1;
   min-width: 130px;
@@ -185,7 +182,6 @@ html[context="webapp"] #donationLink {
   cursor: pointer;
 }
 
-/* Numeric Code Inputs Column */
 .colorDetailsContainer {
   display: flex;
   flex-direction: column;
@@ -217,7 +213,6 @@ html[context="webapp"] #donationLink {
   box-shadow: var(--shadowSubtle);
 }
 
-/* 3. Palette Expansion Accoridons */
 .paletteSection {
   display: flex;
   flex-direction: column;
@@ -254,7 +249,6 @@ html[context="webapp"] #donationLink {
   color: var(--textColor);
 }
 
-/* Palette Tile Grids */
 .paletteTiles {
   padding: 10px;
   border-top: 1px solid var(--borderColor);
@@ -293,7 +287,6 @@ html[theme="dark"] .paletteTiles input {
   z-index: 5;
 }
 
-/* Style for selected state checkmark within tile inputs */
 .paletteTiles input[value="✓"] {
   color: rgb(189, 187, 187) !important;
   font-size: 11px;
@@ -301,7 +294,6 @@ html[theme="dark"] .paletteTiles input {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* 4. Responsive Adaptations */
 @media (max-width: 480px) {
   body {
     min-width: 360px;
@@ -317,22 +309,24 @@ html[theme="dark"] .paletteTiles input {
     height: 120px;
   }
 }
+
 ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
-    margin-block:5px;}
+  background: transparent;
+  margin-block: 5px;
+}
 
 ::-webkit-scrollbar-thumb {
-    background: var(--accentColor);
-    border-radius:20px;
-    cursor: grab;
+  background: var(--accentColor);
+  border-radius: 20px;
+  cursor: grab;
 }
 
 ::-webkit-scrollbar-thumb:active {
-    background: var(--surfaceColorHover);
-    cursor: grabbing;
+  background: var(--surfaceColorHover);
+  cursor: grabbing;
 }

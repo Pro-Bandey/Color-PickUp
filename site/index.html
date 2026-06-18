@@ -21,54 +21,48 @@
 </head>
 
 <body>
-  <!-- Main Header Control Grid -->
-  <header class="controlHeader">
-    <div class="controlLeft">
-      <button class="controlButton" id="clearHistory" title="Clear History">
-        <svg>
-          <use href="#iconClear"></use>
-        </svg>
-      </button>
-      <button class="controlButton" id="colorPicker" title="Color Picker">
-        <svg>
-          <use href="#iconColorPicker"></use>
-        </svg>
-      </button>
-      <button class="controlButton" id="eyeDropper" title="Eye Dropper">
-        <svg>
-          <use href="#iconEyeDropper"></use>
-        </svg>
-      </button>
-      <div class="controlButton" id="tileSize" title="Tile Size (px)">
-        <input id="sizeInput" type="number" value="28" min="8" max="128" step="1">
-      </div>
+  <header class="header">
+    <div class="titleHeader">
+      <img src="../icons/48.png" alt="">
+      <h1 class="titleHeaderHeading" id="titleHeaderHeading">Color PickUp</h1>
     </div>
+    <div class="controlHeader">
+      <div class="controlLeft">
+        <button class="controlButton" id="clearHistory" title="Clear History">
+          <svg>
+            <use href="#iconClear"></use>
+          </svg>
+        </button>
+        <button class="controlButton" id="colorPicker" title="Color Picker">
+          <svg>
+            <use href="#iconColorPicker"></use>
+          </svg>
+        </button>
+        <button class="controlButton" id="eyeDropper" title="Eye Dropper">
+          <svg>
+            <use href="#iconEyeDropper"></use>
+          </svg>
+        </button>
+        <div class="controlButton" id="tileSize" title="Tile Size (px)">
+          <input id="sizeInput" type="number" value="28" min="8" max="128" step="1">
+        </div>
+      </div>
 
-    <div class="controlRight">
-      <button class="toolButton" id="reloadUi" title="Reload UI">
-        <svg>
-          <use href="#iconReload"></use>
-        </svg>
-      </button>
-      <button class="toolButton" id="themeToggle" title="Dark | Light Mode">
-        <svg>
-          <use href="#iconTheme"></use>
-        </svg>
-      </button>
-      <button class="toolButton" id="supportLink" title="Support Page">
-        <svg>
-          <use href="#iconSupport"></use>
-        </svg>
-      </button>
-      <button class="toolButton" id="donationLink" title="Make a Donation">
-        <svg>
-          <use href="#iconDonation"></use>
-        </svg>
-      </button>
+      <div class="controlRight">
+        <button class="toolButton" id="reloadUi" title="Reload UI">
+          <svg>
+            <use href="#iconReload"></use>
+          </svg>
+        </button>
+        <button class="toolButton" id="themeToggle" title="Dark | Light Mode">
+          <svg>
+            <use href="#iconTheme"></use>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Main Active Workspace -->
   <main class="pickerWorkspace">
     <div class="colorDisplaySection">
       <div class="colorPreviewContainer">
@@ -85,7 +79,6 @@
     </div>
   </main>
 
-  <!-- Palette Collapsible Lists -->
   <section class="paletteSection">
     <details class="paletteAccordion" index="0">
       <summary class="paletteSummary">User defined</summary>
@@ -161,7 +154,6 @@
     </details>
   </section>
 
-  <!-- Embedded Sprite Sheet (Ensures reliable local references across Extension popups and standard Web contexts) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="iconClear" viewBox="0 0 48 48">
       <path
@@ -185,17 +177,8 @@
       <path
         d="M 63.550085,1.4875858 A 60.101027,60.101027 0 0 0 3.45,61.587666 60.101027,60.101027 0 0 0 63.550085,121.6899 60.101027,60.101027 0 0 0 119.56373,83.196612 50.463617,50.463617 0 0 1 102.0998,86.352622 50.463617,50.463617 0 0 1 51.637166,35.887862 50.463617,50.463617 0 0 1 65.189815,1.5691534 60.101027,60.101027 0 0 0 63.550085,1.4875858 Z" />
     </symbol>
-    <symbol id="iconSupport" viewBox="0 0 1792 1792">
-      <path
-        d="M1088 1256v240q0 16-12 28t-28 12h-240q-16 0-28-12t-12-28v-240q0-16 12-28t28-12h240q16 0 28 12t12 28zm316-600q0 54-15.5 101t-35 76.5-55 59.5-57.5 43.5-61 35.5q-41 23-68.5 65t-27.5 67q0 17-12 32.5t-28 15.5h-240q-15 0-25.5-18.5t-10.5-37.5v-45q0-83 65-156.5t143-108.5q59-27 84-56t25-76q0-42-46.5-74t-107.5-32q-65 0-108 29-35 25-107 115-13 16-31 16-12 0-25-8l-164-125q-13-10-15.5-25t5.5-28q160-266 464-266 80 0 161 31t146 83 106 127.5 41 158.5z" />
-    </symbol>
-    <symbol id="iconDonation" viewBox="-0.709 -11.555 141.732 141.732">
-      <path
-        d="M140.314,37.654C140.314,16.858,123.402,0,102.537,0c-13.744,0-25.77,7.317-32.379,18.255C63.549,7.317,51.521,0,37.777,0 C16.912,0,0,16.858,0,37.654c0,10.821,4.588,20.57,11.922,27.438h-0.01l54.084,51.584c0.992,1.188,2.48,1.945,4.148,1.945 c1.545,0,2.936-0.653,3.92-1.696l54.346-51.833h-0.016C135.729,58.225,140.314,48.476,140.314,37.654" />
-    </symbol>
   </svg>
 
-  <!-- External Palette Data Sources (Order maintained relative to /page/) -->
   <script type="text/javascript" src="pallets/artistic.js"></script>
   <script type="text/javascript" src="pallets/bluish.js"></script>
   <script type="text/javascript" src="pallets/comic.js"></script>
@@ -215,8 +198,8 @@
   <script type="text/javascript" src="pallets/ui.js"></script>
 
   <script type="text/javascript" src="pallets/notify.js"></script>
-  <!-- Main Script -->
   <script type="text/javascript" src="index.js"></script>
+  <script src="toaster.js"></script>
 </body>
 
 </html>
