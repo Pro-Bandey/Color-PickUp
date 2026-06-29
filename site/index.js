@@ -5,7 +5,7 @@ const config = {
       if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.getManifest) {
         return chrome.runtime.getManifest().homepage_url;
       }
-      return "https://Pro-Bandey.github.io/Projects/?Pro=Color-PickUp";
+      return "https://Pro-Bandey.github.io/?id==Color-PickUp";
     }
   },
   notifications: {
